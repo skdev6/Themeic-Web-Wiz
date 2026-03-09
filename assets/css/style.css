@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*--------------------------------------------------------------
 >>> WebWiz – AJAX Portfolio WordPress Theme
 ----------------------------------------------------------------
@@ -18,13 +19,14 @@
 
 
 */
+/* ==== 
+ --------- (1.01) mixins start ---------
+ ==== */
+/* ==== 
+ --------- (1.01) mixins end ---------
+ ==== */
+body {
+  background-color: white;
+}
 
-
-// abstract styles
-@use "./abstracts/mixins" as mixins;
-@use "./abstracts/variables" as variables;
-
-
-// base styles
-@use "./base/global" as global;  
-@use "./base/typography" as typography;
+/*# sourceMappingURL=style.css.map */
