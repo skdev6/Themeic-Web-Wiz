@@ -1,8 +1,4 @@
-/* ==== 
- --------- (1.01) mixins start ---------
- ==== */
-
- @use "sass:map";
+@use "sass:map";
 
 $breakpoints: (
   sm: 576px,
@@ -59,6 +55,3 @@ $breakpoints: (
     @content;
   }
 }
-/* ==== 
- --------- (1.01) mixins end ---------
- ==== */
