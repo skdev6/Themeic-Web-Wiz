@@ -1,12 +1,5 @@
 @use "sass:map";
-
-$breakpoints: (
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
+@use 'variables' as *;
 
 @mixin respond($size) {
   $value: map.get($breakpoints, $size);

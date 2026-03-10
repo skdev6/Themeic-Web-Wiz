@@ -1,16 +1,15 @@
 <?php
 /**
  * Web Wiz functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
  * @package Web_Wiz
  */
-
-if ( ! defined( '_S_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
+
+$theme_info = wp_get_theme();
+
+define( '_S_VERSION', $theme_info->get("Version") );
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -137,18 +136,7 @@ add_action( 'widgets_init', 'web_wiz_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
-function web_wiz_scripts() {
-	wp_enqueue_style( 'web-wiz-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'web-wiz-style', 'rtl', 'replace' );
-
-	wp_enqueue_script( 'web-wiz-main', get_template_directory_uri() . 'assets//js/main.js', array(), _S_VERSION, true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'web_wiz_scripts' );
-
+require get_template_directory() . '/inc/theme-scripts.php';
 /**
  * Implement the Custom Header feature.
  */

@@ -4,6 +4,7 @@
 
 [Table of Contents]
 
+1. Global
 1. Base
 	- Variables
 	- Colors
@@ -18,13 +19,13 @@
 
 
 */
-
-
-// abstract styles
-@use "./abstracts/mixins" as mixins;
-@use "./abstracts/variables" as variables;
-
-
-// base styles
-@use "./base/global" as global;  
-@use "./base/typography" as typography;
+/*global styles*/ 
+@use "./base/global";  
+/*base styles*/
+@use "./base/typography";  
+/*Helper Class*/
+@use "./base/helper";  
+/*base styles*/
+@use "./components/button";  
+/*base styles*/
+@use "./layouts/header";  

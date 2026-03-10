@@ -1,0 +1,8 @@
+.btn-theme-toggle,.btn-menu-toggle,.btn-transparent{
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
+.btn-menu-toggle.border{
+    border: 1px solid var(--clr-base);
+}
