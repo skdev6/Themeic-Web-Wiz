@@ -1,3 +1,150 @@
+@use '../abstracts/mixins' as *;
+
+
+.th-show-light{
+  display: var(--themeic-show-light);
+}
+
+.th-show-dark{
+  display: var(--themeic-show-dark);
+}
+
+.th-text-primary-brand{
+  color: var(--themeic-primary);
+}
+
+.th-text-secondary-brand{
+  color: var(--themeic-secondary);
+}
+
+.th-bg-primary{
+  background-color: var(--themeic-primary);
+}
+
+.th-bg-secondary{
+  background-color: var(--themeic-secondary);
+}
+
+.th-text-white{
+  color: var(--themeic-white);
+}
+
+.th-text-black{
+  color: var(--themeic-black);
+}
+
+.th-bg-white{
+  background-color: var(--themeic-white);
+}
+
+.th-bg-black{
+  background-color: var(--themeic-black);
+}
+
+.th-bg-body{
+  background-color: var(--themeic-bg-body);
+}
+
+.th-text-primary{
+  color: var(--themeic-text-primary);
+}
+
+.th-text-secondary{
+  color: var(--themeic-text-secondary);
+}
+
+.th-text-muted{
+  color: var(--themeic-text-muted);
+}
+
+.th-text-disabled{
+  color: var(--themeic-text-disabled);
+}
+
+.th-border{
+  border-color: var(--themeic-border);
+}
+
+.th-border-strong{
+  border-color: var(--themeic-border-strong);
+}
+
+.th-border-muted{
+  border-color: var(--themeic-border-muted);
+}
+
+.th-border-subtle{
+  border-color: var(--themeic-border-subtle);
+}
+
+.mr-space-12{
+  margin-right: 1.4rem !important;
+}
+.ml-space-12{
+  margin-left: 1.4rem !important; 
+}
+@include lg{
+  .mr-space-12{
+    margin-right: 3.313rem !important;
+  }
+  .ml-space-12{
+    margin-left: 3.313rem !important; 
+  }
+}
+@include xl{
+  .mr-space-12{
+    margin-right: 6rem !important;
+  }
+  .ml-space-12{
+    margin-left: 6rem !important;
+  }
+}
+@include xxl{
+  .mr-space-12{
+    margin-right: 12.5rem !important;
+  }
+  .ml-space-12{
+    margin-left: 12.5rem !important;
+  }
+}
+
+.pr-space-12{
+  padding-right: 1.4rem !important;
+}
+.pl-space-12{
+  padding-left: 1.4rem !important; 
+}
+@include lg{
+  .pr-space-12{
+    padding-right: 3.313rem !important;
+  }
+  .pl-space-12{
+    padding-left: 3.313rem !important; 
+  }
+}
+@include xl{
+  .pr-space-12{
+    padding-right: 6rem !important;
+  }
+  .pl-space-12{
+    padding-left: 6rem !important;
+  }
+}
+@include xxl{
+  .pr-space-12{
+    padding-right: 12.5rem !important;
+  }
+  .pl-space-12{
+    padding-left: 12.5rem !important;
+  }
+}
+
 .gap-x-53{
-  column-gap: 3.313rem;
+  column-gap:1.4rem;
+  @include lg{
+    column-gap:2rem;
+  }
+  @include xl{
+    column-gap: 3.313rem;
+  }
 }

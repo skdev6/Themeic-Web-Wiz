@@ -14,33 +14,76 @@
 <body>
     <main class="tt-page-wrapper">
         <header class="header-area">
-            <div class="header-container d-flex align-items-center justify-content-between">
+            <div class="header-container d-flex align-items-center">
                 <a href="#" class="logo">
-                    <img class="" src="../assets/img/logo.svg" alt="">
+                    <img class="th-show-light" class="" src="../assets/img/logo.svg" alt="">
+                    <img class="th-show-dark" class="" src="../assets/img/logo-light.svg" alt="">
                 </a>
-                <ul class="header-navbar">
+                <ul class="header-navbar ml-space-12 d-xl-flex d-none">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
-                <div class="gap-x-53 d-flex align-items-center">
-                    <div class="header-copyright">© 2026</div>
-                    <button class="btn-theme-toggle">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.66667 14H8.33333V16H7.66667V14ZM8.33333 0H7.66667V2H8.33333V0ZM14 7.66667V8.33333H16V7.66667H14ZM0 8.33333H2V7.66667H0V8.33333ZM2.10733 13.4213L2.57867 13.8927L3.99333 12.4787L3.522 12.0073L2.10733 13.4213ZM12.0073 3.522L12.4787 3.99333L13.8927 2.57867L13.4213 2.10733L12.0073 3.522ZM12.0073 12.4787L13.4213 13.8927L13.8927 13.4213L12.4787 12.0073L12.0073 12.4787ZM3.99333 3.522L2.57867 2.10733L2.10733 2.57867L3.522 3.99333L3.99333 3.522ZM12.6667 8C12.6667 10.5727 10.5727 12.6667 8 12.6667C5.42733 12.6667 3.33333 10.5727 3.33333 8C3.33333 5.42733 5.42667 3.33333 8 3.33333C10.5733 3.33333 12.6667 5.42667 12.6667 8ZM12 8C12 5.794 10.206 4 8 4V12C10.206 12 12 10.206 12 8Z" fill="black"/>
-                        </svg>
+                <div class="ml-auto mr-space-12 gap-x-53 d-flex align-items-center">
+                    <div class="header-copyright th-text-secondary d-none d-lg-block">© 2026</div>
+                    <button class="btn-theme-toggle th-text-primary">
+                        <span class="tgl-icon d-flex">
+                            <svg class="th-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.66667 14H8.33333V16H7.66667V14ZM8.33333 0H7.66667V2H8.33333V0ZM14 7.66667V8.33333H16V7.66667H14ZM0 8.33333H2V7.66667H0V8.33333ZM2.10733 13.4213L2.57867 13.8927L3.99333 12.4787L3.522 12.0073L2.10733 13.4213ZM12.0073 3.522L12.4787 3.99333L13.8927 2.57867L13.4213 2.10733L12.0073 3.522ZM12.0073 12.4787L13.4213 13.8927L13.8927 13.4213L12.4787 12.0073L12.0073 12.4787ZM3.99333 3.522L2.57867 2.10733L2.10733 2.57867L3.522 3.99333L3.99333 3.522ZM12.6667 8C12.6667 10.5727 10.5727 12.6667 8 12.6667C5.42733 12.6667 3.33333 10.5727 3.33333 8C3.33333 5.42733 5.42667 3.33333 8 3.33333C10.5733 3.33333 12.6667 5.42667 12.6667 8ZM12 8C12 5.794 10.206 4 8 4V12C10.206 12 12 10.206 12 8Z" fill="black"/>
+                            </svg>
+                        </span>
                     </button>
                 </div>
-                <button class="btn-menu-toggle border">
-                    <span>Menu</span> 
+                <button class="btn-menu-toggle with-border">
+                    <span class="menu-text">
+                        <span class="open">Menu</span>
+                        <span class="close">close</span>
+                    </span> 
                     <span class="menu-line2"></span>
                 </button>
             </div>
         </header>
+        <header class="header-area">
+            <div class="header-container d-flex align-items-center">
+                <a href="#" class="logo">
+                    <img class="th-show-light" class="" src="../assets/img/logo.svg" alt="">
+                    <img class="th-show-dark" class="" src="../assets/img/logo-light.svg" alt="">
+                </a>
+                <div class="gap-x-53 mr-space-12 ml-auto d-xl-flex d-none">
+                    <ul class="header-navbar vertical-navbar menu-text-secondary">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Concept project</a></li>
+                    </ul>
+                    <ul class="header-navbar vertical-navbar menu-text-secondary">
+                        <li><a href="#">Designed by</a></li>
+                        <li><a href="#">Yuliia Salivon</a></li>
+                    </ul>
+                    <ul class="header-navbar vertical-navbar menu-text-secondary">
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Web design</a></li>
+                        <li><a href="#">Motion design</a></li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center gap-x-53 ml-xl-0 ml-auto">
+                    <div class="gap-x-53 d-flex align-items-center">
+                        <div class="header-copyright th-text-secondary d-none d-lg-block">© 2026</div>
+                        <button class="btn-theme-toggle th-text-primary d-flex">
+                            <svg class="th-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.66667 14H8.33333V16H7.66667V14ZM8.33333 0H7.66667V2H8.33333V0ZM14 7.66667V8.33333H16V7.66667H14ZM0 8.33333H2V7.66667H0V8.33333ZM2.10733 13.4213L2.57867 13.8927L3.99333 12.4787L3.522 12.0073L2.10733 13.4213ZM12.0073 3.522L12.4787 3.99333L13.8927 2.57867L13.4213 2.10733L12.0073 3.522ZM12.0073 12.4787L13.4213 13.8927L13.8927 13.4213L12.4787 12.0073L12.0073 12.4787ZM3.99333 3.522L2.57867 2.10733L2.10733 2.57867L3.522 3.99333L3.99333 3.522ZM12.6667 8C12.6667 10.5727 10.5727 12.6667 8 12.6667C5.42733 12.6667 3.33333 10.5727 3.33333 8C3.33333 5.42733 5.42667 3.33333 8 3.33333C10.5733 3.33333 12.6667 5.42667 12.6667 8ZM12 8C12 5.794 10.206 4 8 4V12C10.206 12 12 10.206 12 8Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="btn-menu-toggle">
+                        <span class="menu-line2"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
         <section class="page__hero pt-5">
             <div class="container">
-                <h2 class="title-h1">Our Blogs</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quam vero nesciunt omnis dolor dignissimos atque, totam accusantium adipisci perferendis ad excepturi ipsum. Eveniet quo eaque nisi totam inventore quam?</p>
+                <h2 class="title-h1 th-text-primary">Our Blogs</h2>
+                <p class="th-text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quam vero nesciunt omnis dolor dignissimos atque, totam accusantium adipisci perferendis ad excepturi ipsum. Eveniet quo eaque nisi totam inventore quam?</p>
             </div>
         </section>
     </main>

@@ -1,17 +1,58 @@
-:root{
-  --base-clr: #616161;
-  --base-body-bg:#F3F7FA;
-  --d-light-mode:block;
+:root,html.light-mode{
+  /* Smooth UI */
+  --th-transition-smooth: all .5s cubic-bezier(.4,0,.2,1);
+
+  /* Expo */
+  --th-transition-expo-out: all .5s cubic-bezier(0.16,1,0.3,1);
+  --th-transition-expo-in: all .5s cubic-bezier(0.7,0,0.84,0);
+
+  /* Back */
+  --th-transition-back-out: all .5s cubic-bezier(0.34,1.56,0.64,1);
+  --th-transition-back-in: all .5s cubic-bezier(0.36,0,0.66,-0.56);
+  /* Brand */
+  --themeic-primary:#6155F5;
+  --themeic-secondary:#C1ED00;
+
+  /* Static */
+  --themeic-white:#fff;
+  --themeic-black:#000;
+
+  /* Mode helpers */
+  --themeic-show-light:block;
+  --themeic-show-dark:none;
+
+  /* Background */
+  --themeic-bg-body:#F3F7FA;
+
+  /* Text */
+  --themeic-text-primary:#000;
+  --themeic-text-secondary:#616161;
+  --themeic-text-muted:rgba(0,0,0,0.45);
+  --themeic-text-disabled:rgba(0,0,0,0.3);
+
+  /* Border */
+  --themeic-border-strong:#000;
+  --themeic-border:#e6e6e6;
+  --themeic-border-muted:rgba(0,0,0,0.16);
+  --themeic-border-subtle:rgba(0,0,0,0.08);
 }
 /* System Dark Mode */
 @media (prefers-color-scheme: dark){
   :root{
-    --base-clr: #B8B8B8;
-    --base-body-bg:#111111;
-    --d-light-mode:none;
-  }
-  .light-mode{
-    --base-clr: #616161;
-    --base-body-bg:#F3F7FA;
+    --themeic-bg-body:#111111;
+
+    --themeic-show-light:none;
+    --themeic-show-dark:block;
+
+    --themeic-text-primary:#ffffff;
+    --themeic-text-secondary:rgba(255,255,255,0.7);
+    --themeic-text-muted:rgba(255,255,255,0.45);
+    --themeic-text-disabled:rgba(255,255,255,0.3);
+
+    --themeic-border-strong:#ffffff;
+    --themeic-border:#333;
+    --themeic-border-muted:rgba(255,255,255,0.16);
+    --themeic-border-subtle:rgba(255,255,255,0.08);
   }
 }
+

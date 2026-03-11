@@ -13,12 +13,17 @@
   }
 }
 
+
+@mixin xs {  
+  @include respond(xs) {
+    @content;
+  }
+}
 @mixin sm {
   @include respond(sm) {
     @content;
   }
 }
-
 @mixin md {
   @include respond(md) {
     @content;
@@ -33,12 +38,6 @@
 
 @mixin xl {
   @include respond(xl) {
-    @content;
-  }
-}
-
-@mixin xxl {
-  @include respond(xx) {
     @content;
   }
 }
