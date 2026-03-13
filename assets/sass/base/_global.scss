@@ -7,8 +7,8 @@
   --th-transition-expo-in: all .5s cubic-bezier(0.7,0,0.84,0);
 
   /* Back */
-  --th-transition-back-out: all .5s cubic-bezier(0.34,1.56,0.64,1);
-  --th-transition-back-in: all .5s cubic-bezier(0.36,0,0.66,-0.56);
+  --th-transition-back-out: all .3s cubic-bezier(0.34,1.56,0.64,1);
+  --th-transition-back-in: all .3s cubic-bezier(0.36,0,0.66,-0.56);
   /* Brand */
   --themeic-primary:#6155F5;
   --themeic-secondary:#C1ED00;
@@ -22,6 +22,8 @@
   --themeic-show-dark:none;
 
   /* Background */
+  --themeic-submenu-bg:#ffffff;
+  --themeic-submenu-item-bg:#dee5ea;
   --themeic-bg-body:#F3F7FA;
 
   /* Text */
@@ -39,7 +41,9 @@
 /* System Dark Mode */
 @media (prefers-color-scheme: dark){
   :root{
-    --themeic-bg-body:#111111;
+  --themeic-submenu-item-bg:hsla(0,0%,100%,.125);
+  --themeic-submenu-bg:#222;
+    --themeic-bg-body:#111111; 
 
     --themeic-show-light:none;
     --themeic-show-dark:block;
