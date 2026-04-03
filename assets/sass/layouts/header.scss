@@ -5,7 +5,6 @@
     list-style: none;
 }
 .header-container{
-    padding-inline:1rem;
     padding-block: 1rem;
     .logo{
         display: block;
@@ -21,12 +20,7 @@
     }
     @include xl{ 
         padding-block: 0rem;
-        
     }
-    @include xxl{ 
-        padding-inline: 3.3rem;
-    }
-
 } 
 .header-gap-12{
     gap: 8rem;
@@ -41,7 +35,7 @@
 .header-area{
     transition:var(--th-transition-expo-out);   
 }
-.header-overlay{
+.header-overlay,.burger-menu-overlay{
     position: fixed;
     height: 100vh;
     width: 100%;
@@ -52,8 +46,20 @@
     visibility: hidden;  
     transition:var(--th-transition-expo-out);     
 }
+.burger-menu-overlay{
+    z-index: 3;
+}
 .header-area-wrap{
-    &.active-sub-menu,&.active-burger-menu{
+    &.absolute-header,&.fixed-header{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    &.fixed-header{
+        position: fixed;
+    }
+    &.active-sub-menu{
         .header-area{
             background-color: var(--themeic-bg-body);
         }
@@ -61,6 +67,21 @@
             opacity: 1;
             visibility: visible;
         }
+    }
+    &.active-burger-menu{
+        .burger-menu-overlay{
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .btn-menu-toggle,.toggle-btn-wrap{
+        position: relative;
+        z-index: 5;
+    }
+}
+.admin-bar{
+    .header-area-wrap.fixed-header{
+        margin-top: 32px;
     }
 }
 .header-area-wrap{
@@ -283,24 +304,113 @@
     }
 
 .themeic-burger-navbar-wrap{
+    --initial-top:20px;
+    --initial-right:20px;
+    --toggle-btn-x:-1rem;
+    --toggle-btn-y:2.188rem;
+    --top:20px;
+    --right:20px;
     position: absolute;
-    right: 100px;
-    top: 100px;
-    z-index: 995;
+    right:var(--initial-right);
+    top: var(--initial-top);
+    z-index: 4;
     background-color: var(--themeic-bg-body);
+    overflow: hidden; 
+    display: flex;
+    justify-content: end;
+    border-radius: 15px;
+    transform: scale(0);
+    transform-origin: top right; 
+    opacity: 0;
+    visibility: hidden;
+    @include max-md{ 
+        width: calc(100% - var(--top) * 2);
+    }
+    @include max-xxl{ 
+            --toggle-btn-x:-3.4rem;
+    --toggle-btn-y:2.62rem;
+    }
+    @include max-md{ 
+        --toggle-btn-x:-2.2rem;
+        --toggle-btn-y:1.85rem;
+    }
+    .burger-menu-header {
+        margin-bottom: 1.875rem;
+    }
     .burger-menu-inner{
-        padding: 50px;
+        max-height: calc(100vh - var(--top) * 2);
+        overflow-y: auto;
+        @include md{ 
+            min-width: 600px;
+            padding: 3.125rem;
+        }
+        @include max-md{ 
+            width: 100%;
+            padding: 2rem;
+        }
     }  
 }  
-.burger-navbar{
+.burger-navbar{ 
     font-size:3.25rem;
-    line-height: 120%;
+    @include max-md{ 
+       font-size: 2rem;
+    }
     li{
+        position: relative;
         a{
             color: var(--themeic-text-primary);
             text-decoration: none;
             display: block;
-            padding:5px 0;
+            padding:.8rem 0;
+            font-size: 1em;
+            line-height: 120%;
+            @include max-md{ 
+                padding:0.5rem 0;
+            }
         }
+        .sub-menu{
+            font-size: .6em;
+            padding-left: 1.5rem;
+            display: none;
+            li > a{
+                padding:.4rem 0;
+            }
+        }
+    }
+}
+.plusminus-icon{
+    position: absolute;
+    height: var(--height);
+    width: var(--height);
+    top: 0;
+    right: 0;
+    z-index: 5;
+    &.active {
+        &:before {
+            transform: translatey(-50%) rotate(-90deg);
+            opacity: 0;
+        }
+        &:after {
+            transform: translatey(-50%) rotate(0);
+        }
+    }
+    
+    &:before , &:after {
+        content: "";
+        display: block;
+        background-color: #333;
+        position: absolute;		
+        top: 50%; right: 0;
+        transition: .35s;
+        width: 50%;
+        height: 2px;
+    }
+    
+    &:before {		
+        transform: translatey(-50%);
+    }
+    
+    &:after {
+        transform: translatey(-50%) rotate(90deg);
     }
 }

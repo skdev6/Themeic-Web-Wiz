@@ -1,14 +1,100 @@
+@use '../abstracts/mixins' as *;
 html{
     font-size: 16px;
 }
 body{
-    font-size: 1rem;
     line-height:1.75rem;
     font-family: "Sora", sans-serif;
     background-color: var(--themeic-bg-body);
+    color: var(--themeic-text-secondary);
+    font-size: 0.875rem;
+    @include lg{
+        font-size: 1rem;
+    }
 }
+.title-h1,.title-h2,.title-h3,.title-h4,.title-h5,.title-h6,h1,h2,h3,h4,h5,h6{
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: .8rem;
+    color: var(--themeic-text-primary);
+    line-height:122%;  
+}
+.auto-title-space{
+    margin-bottom:.9em; 
+}
+
 .title-h1,h1{
-    font-size: 8rem;
-    line-height:115%;
-    margin: 0;
+    font-size: 6rem; // 128px
+    @include xl{
+        font-size: 8rem; // 128px
+    }
+}
+.title-h2,h2{
+    @include xl{
+        font-size: 4.5rem; // 72px
+    }
+}
+.title-h3,h3{ 
+    font-size: 2.8rem;
+    @include xl{
+        font-size:3.25rem; // 52px
+    }
+    @include max_md{
+        font-size:2.3rem;
+    }
+}
+.title-h4,h4{
+    font-size: 1.55rem;
+    @include xl{
+        font-size: 1.75rem; // 28px
+    }
+}
+.text-lg{
+    font-size:1rem;
+    @include xl{
+        font-size:1.125rem;
+    }
+    line-height: 130%;
+}
+.text-md{
+    font-size: 0.8rem;
+    @include lg{
+        font-size: 0.875rem;
+    }
+    line-height: 130%;
+}
+.text-sm{
+    line-height: 130%;
+    font-size:0.69rem; 
+    @include lg{
+        font-size: 0.75rem;
+    }
+}
+.display-h1{
+    line-height: 103%;
+    @include xxl{
+        font-size: 12.5rem;
+    }
+    @include max_xxl{
+        font-size: 8.5rem;
+    }
+    @include max_md{ 
+        font-size:4rem;
+    }
+}
+.fw-100{font-weight: 100;}
+.fw-200{font-weight: 200;}
+.fw-300{font-weight: 300;}
+.fw-400{font-weight: 400;}
+.fw-500{font-weight: 500;}
+.fw-600{font-weight: 600;}
+.fw-700{font-weight: 700;}
+.fw-800{font-weight: 800;}
+.fw-900{font-weight: 900;}
+.text-sora{
+    font-family: "Sora", sans-serif;
+}
+.text-big-shoulders{
+    font-family: "Sora", sans-serif;
 }

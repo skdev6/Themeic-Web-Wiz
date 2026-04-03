@@ -76,7 +76,7 @@
                 </div>
             </div>
         </header>
-        <header class="themeic__header header-area-wrap active-burger-menu">
+        <header class="themeic__header header-area-wrap absolute-header">
             <div class="header-overlay"></div>
             <div class="header-area">
                 <div class="header-container d-flex align-items-center">
@@ -120,51 +120,79 @@
                             </span>
                         </button>
                     </div>
-                    <button class="btn-menu-toggle with-border">
-                        <span class="menu-text">
-                            <span class="open">Menu</span>
-                            <span class="close">close</span>
-                        </span> 
-                        <span class="menu-line2"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="themeic-burger-navbar-wrap">
-                <div class="burger-menu-inner">
-                    <div class="burger-menu-header d-flex align-items-center justify-content-between">
-                        <span class="menu-text th-text-muted d-block">Menu</span>
-                        <span class="btn-pos"></span>
+                    <div class="toggle-btn-wrap">
+                        <div class="toggle-btn-inner">
+                            <button class="btn-menu-toggle with-border">
+                                <span class="menu-text">
+                                    <span class="open">Menu</span>
+                                    <span class="close">Close</span>
+                                </span> 
+                                <span class="menu-line2"></span>
+                            </button>
+                        </div>
                     </div>
-                    <ul class="burger-navbar">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li>
-                            <a href="#">Contact</a>
-                            <ul class="sub-menu">
+                    <div class="burger-menu-overlay"></div>
+                    <div class="themeic-burger-navbar-wrap">
+                        <div class="burger-menu-inner">
+                            <div class="burger-menu-header d-flex align-items-center justify-content-between">
+                                <span class="menu-text th-text-muted d-block">Menu</span>
+                                <span class="btn-pos"></span>
+                            </div>
+                            <ul class="burger-navbar">
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">About</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Hello</a></li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="#">Hello</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                        <li><a href="#">Hello</a></li>
-                    </ul>
-                    <div class="burger-menu-footer">
-                        <p class="footer-info th-text-primary d-block">
-                            <span class="th-text-muted d-block">Our Office are open 07AM - 22PM</span>
-                            Monday - Friday
-                        </p>
-                        <ul class="social-icons">
+                            <div class="burger-menu-footer">
+                                <p class="footer-info th-text-primary d-block">
+                                    <span class="th-text-muted d-block">Our Office are open 07AM - 22PM</span>
+                                    Monday - Friday
+                                </p>
+                                <ul class="social-icons">
 
-                        </ul>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
+        <section class="page-hero has-abs-header">
+            <div class="container-fluid">
+                <h2 class="title display-h1 text-center">About Us</h2>
+                <div class="d-flex align-items-center gap-2"> 
+                    <p class="text-md mb-0">&copy; Since 2028</p>
+                    <ul class="breadcrumb ml-auto mr-auto text-md">
+                        <li><a href="#">Home</a></li>
+                        <li>Blog</li>
+                    </ul>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="themeic-icon-facebook"></i></a></li>
+                        <li><a href="#"><i class="themeic-icon-youtube"></i></a></li>
+                        <li><a href="#"><i class="themeic-icon-instagram"></i></a></li>
+                        <li><a href="#"><i class="themeic-icon-x"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
         <section class="page__hero pt-5">
             <div class="container">
                 <h2 class="title-h1 th-text-primary">Our Blogs</h2>
                 <p class="th-text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quam vero nesciunt omnis dolor dignissimos atque, totam accusantium adipisci perferendis ad excepturi ipsum. Eveniet quo eaque nisi totam inventore quam?</p>
+                <a href="#" class="th-btn th-btn-primary">
+                    <i class="themeic-icon-agnle-right themeic-icon-after"></i>
+                    <span class="btn-text">
+                        <span class="word">Read More</span>
+                    </span>
+                </a>
             </div>
         </section>
     </main>

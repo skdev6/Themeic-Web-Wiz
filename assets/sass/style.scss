@@ -9,7 +9,7 @@
 	- Variables
 	- Colors
 	- Typography
-	- Links
+	- Links  
 	- Forms
 2. Layouts & Components
 	- Buttons
@@ -19,13 +19,21 @@
 
 
 */
-/*global styles*/ 
+/*global styles*/  
 @use "./base/global";  
 /*base styles*/
 @use "./base/typography";  
 /*Helper Class*/
 @use "./base/helper";  
-/*base styles*/
+/*Buttons styles*/
 @use "./components/button";  
-/*base styles*/
+/*header styles*/
 @use "./layouts/header";  
+/*Cards styles*/
+@use "./components/cards";  
+/*Breadcrumb Style*/
+@use "./components/breadcrumb";  
+/*Hero Style*/
+@use "./components/page-hero";  
+/*Themeic Icons*/
+@use "./Utilities/icons";  

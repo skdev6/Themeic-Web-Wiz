@@ -25,9 +25,12 @@
   --themeic-submenu-bg:#ffffff;
   --themeic-submenu-item-bg:#dee5ea;
   --themeic-bg-body:#F3F7FA;
+  --themeic-bg-gradient-muted-opacity-top:1;
+  --themeic-bg-gradient-muted:linear-gradient(to bottom, rgba(255,255,255, var(--themeic-bg-gradient-muted-opacity-top)) 0%,rgba(243,247,250,1) 100%);
 
   /* Text */
   --themeic-text-primary:#000;
+  --themeic-text-primary-inverse:#ffffff;
   --themeic-text-secondary:#616161;
   --themeic-text-muted:rgba(0,0,0,0.45);
   --themeic-text-disabled:rgba(0,0,0,0.3);
@@ -36,6 +39,7 @@
   --themeic-border-strong:#000;
   --themeic-border:#e6e6e6;
   --themeic-border-muted:rgba(0,0,0,0.16);
+  --themeic-border-muted-extra:rgba(0, 0, 0, 0.05);
   --themeic-border-subtle:rgba(0,0,0,0.08);
 }
 /* System Dark Mode */
@@ -44,11 +48,13 @@
   --themeic-submenu-item-bg:hsla(0,0%,100%,.125);
   --themeic-submenu-bg:#222;
     --themeic-bg-body:#111111; 
+    --themeic-bg-gradient-muted:linear-gradient(to bottom, rgba(21, 21, 21, var(--themeic-bg-gradient-muted-opacity-top)) 0%,rgb(17, 17, 17) 100%);
 
     --themeic-show-light:none;
     --themeic-show-dark:block;
 
     --themeic-text-primary:#ffffff;
+    --themeic-text-primary-inverse:#000000;
     --themeic-text-secondary:rgba(255,255,255,0.7);
     --themeic-text-muted:rgba(255,255,255,0.45);
     --themeic-text-disabled:rgba(255,255,255,0.3);
@@ -56,6 +62,7 @@
     --themeic-border-strong:#ffffff;
     --themeic-border:#333;
     --themeic-border-muted:rgba(255,255,255,0.16);
+    --themeic-border-muted-extra:rgba(255, 255, 255, 0.05);
     --themeic-border-subtle:rgba(255,255,255,0.08);
   }
 }

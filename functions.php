@@ -48,7 +48,8 @@ function web_wiz_theme_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'header-menu' => esc_html__( 'Header Menu', 'web-wiz' ),
+			'primary-menu' => esc_html__( 'Primary Menu', 'web-wiz' ),
+			'hamburger-menu' => esc_html__( 'Hamburger Menu', 'web-wiz' ),
 		)
 	);
 
@@ -133,6 +134,10 @@ function web_wiz_widgets_init() {
 }
 add_action( 'widgets_init', 'web_wiz_widgets_init' );
 
+/**
+ * All Helper Functions
+ */
+require get_template_directory() . '/inc/helper-function.php';
 /**
  * Enqueue scripts and styles.
  */

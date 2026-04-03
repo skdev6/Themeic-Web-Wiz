@@ -2,6 +2,7 @@
 function web_wiz_scripts() {
 	wp_enqueue_style( 'web-wiz-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_style ('themeic-grid', get_template_directory_uri() . '/assets/css/themeic-grid.min.css', array(), _S_VERSION, null);
+	wp_enqueue_style ('themeic-fonts', get_template_directory_uri() . '/assets/fonts/themeic-icon/style.css', array(), _S_VERSION, null);
 	wp_enqueue_style ('web-wiz', get_template_directory_uri() . '/assets/css/style.css', array(), _S_VERSION, null);
 
 	wp_enqueue_script( 'gsap', get_template_directory_uri() . '/assets/js/gsap.min.js', array('jquery'), _S_VERSION, true );

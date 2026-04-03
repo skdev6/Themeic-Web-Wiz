@@ -35,3 +35,62 @@ function web_wiz_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'web_wiz_pingback_header' );
+
+/**
+ * Load template from Themeic Framework or fallback to theme template part.
+ *
+ * @param string $type Action hook name.
+ * @param string $template_slug Template slug/path.
+ * @return void
+ */
+function web_wiz_get_header_template( $template_slug = 'template-parts/content-header' ) {
+    if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
+        do_action(
+            'themeic_header_builder',
+            array(
+                'default' => $template_slug,
+            )
+        );
+    } else {
+        get_template_part( $template_slug );
+    }
+}
+
+function web_wiz_get_footer_template( $template_slug = 'template-parts/footer/default' ) {
+    if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
+        do_action(
+            'themeic_footer_builder',
+            array(
+                'default' => $template_slug,
+            )
+        );
+    } else {
+        get_template_part( $template_slug );
+    }
+}
+
+function web_wiz_get_single_template( $template_slug = 'template-parts/content-post' ) { 
+    if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
+        do_action(
+            'themeic_single_builder',
+            array(
+                'default' => $template_slug,
+            )
+        );
+    } else {
+        get_template_part( $template_slug );
+    }
+}
+
+function web_wiz_get_archive_template( $template_slug = 'template-parts/content-blog' ) {
+    if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
+        do_action(
+            'themeic_archive_builder',
+            array(
+                'default' => $template_slug,
+            )
+        );
+    } else {
+        get_template_part( $template_slug );
+    }
+}
