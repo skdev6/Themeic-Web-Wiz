@@ -226,3 +226,21 @@
     border-radius:2.5rem;
   }
 }
+.max-w-350{
+  max-width: 350px; 
+}
+.single-post-content{
+    margin-top: 2.2rem;
+} 
+.themeic-comment-section{
+  margin-top:8.313rem;
+} 
+.bg-white{
+  background-color: #fff;
+}
+.bg-base{
+  background:var(--themeic-bg-body);
+}
+.bg-on-base{
+  background-color:rgba(var(--themeic-bg-on-base-rgb), 1);
+}

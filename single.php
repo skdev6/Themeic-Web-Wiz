@@ -10,9 +10,13 @@
 get_header();
 ?>
 	<main id="single__root" class="single__root">
-		<?php 
-			get_template_part('template-parts/content', 'page-hero'); 
-			web_wiz_get_single_template();
+		<?php  
+			if(have_posts()){
+				while (have_posts()) {
+					the_post();
+					web_wiz_get_single_template();
+				}
+			}
 		?>
 	</main>
 <?php

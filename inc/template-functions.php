@@ -69,7 +69,7 @@ function web_wiz_get_footer_template( $template_slug = 'template-parts/footer/de
     }
 }
 
-function web_wiz_get_single_template( $template_slug = 'template-parts/content-post' ) { 
+function web_wiz_get_single_template( $template_slug = 'template-parts/content-single-post' ) { 
     if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
         do_action(
             'themeic_single_builder',

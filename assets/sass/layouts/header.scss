@@ -100,6 +100,7 @@
         gap:50px;
         --sub-padding:15px;
         --sub-space:10px;
+        --child-sub-space:0px;
         --sub-min-w:250px;
         li{ 
             position: relative; 
@@ -162,13 +163,13 @@
                 }
                 .sub-menu{
                     padding:var(--sub-padding);
-                    min-width: calc(calc(var(--sub-min-w)) + var(--sub-padding) + var(--sub-space));
+                    min-width: calc(calc(var(--sub-min-w)) + var(--sub-padding) + var(--sub-space) + var(--child-sub-space));
                     > li{
-                        padding-left: calc(var(--sub-padding) + var(--sub-space));
+                        padding-left: calc(var(--sub-padding) + var(--sub-space) + var(--child-sub-space));
                     }
                     &::before{
                         top: 0;
-                        width: calc(100% - calc(var(--sub-padding) + var(--sub-space))); 
+                        width: calc(100% - calc(var(--sub-padding) + var(--sub-space) + var(--child-sub-space))); 
                         height: 100%;
                     }
                 }
@@ -252,12 +253,7 @@
                 }
             }
         }
-        .current-menu-parent,.current_page_item{
-            > a{
-                color: var(--clr-base) !important;  
-                text-decoration: underline; 
-            } 
-        }
+        
         .menu-item.has-mega-menu{
             z-index: 1;
         } 
@@ -300,6 +296,37 @@
                     display: none;
                 }
             }
+        }
+        &.nav-style-rounded{
+            border-radius: 30rem;
+            padding:0.7rem;
+            gap: .5rem;
+            --sub-space:1.25rem;
+            --child-sub-space: -8px;
+            background-color: rgba(var(--themeic-bg-on-base-rgb), 0.8);
+                    backdrop-filter: blur(10px);
+            li{
+                >  a{
+                    padding:.5rem .75rem;
+                    border-radius: 30rem;
+                }
+                &.current-menu-item{
+                    > a{
+                        background-color: var(--themeic-bg-primary-inverse);
+                        color: var(--themeic-text-primary-inverse);
+                    }
+                }
+            }
+            .sub-menu{
+                &::before{
+                    background-color:rgba(var(--themeic-bg-on-base-rgb), 1);
+                }
+            }
+        }
+        &.navbar-abs-center{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
     }
 
@@ -413,4 +440,7 @@
     &:after {
         transform: translatey(-50%) rotate(90deg);
     }
+}
+.header-py{
+    padding-block: 1.25rem;
 }

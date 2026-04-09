@@ -124,9 +124,9 @@ function web_wiz_widgets_init() {
 		array(
 			'name'          => esc_html__( 'Sidebar', 'web-wiz' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'web-wiz' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
+			'description'   => esc_html__( 'Add widgets here for sidebar.', 'web-wiz' ),
+			'before_widget' => '<div id="%1$s" class="themeic-sidebar-default widget %2$s">',
+			'after_widget'  => '</div>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
 		)

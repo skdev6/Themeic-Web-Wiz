@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <a class="card-title title-h4 d-block" href="<?php the_permalink(); ?>">
+        <a class="card-title title-h5 d-block" href="<?php the_permalink(); ?>">
             <?php echo esc_html( get_the_title() ); ?>
         </a>
 

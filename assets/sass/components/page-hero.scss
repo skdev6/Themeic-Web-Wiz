@@ -9,7 +9,9 @@
     @include max_md{
         --space-y:3.3rem;
     }
-    background: var(--themeic-bg-gradient-muted);
+    &:not(.bg-base){
+        background: var(--themeic-bg-gradient-muted);
+    }
     padding-top: calc(var(--space-y) + var(--space-top-extra));
     padding-bottom: calc(var(--space-y) + var(--space-bottom-extra));
     .title{

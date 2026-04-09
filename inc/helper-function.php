@@ -14,7 +14,7 @@ function web_wiz_option( $key, $default = false ) {
     if ( function_exists( 'get_themeic_framework_option' ) ) {
         $value = get_themeic_framework_option( $key );
 
-        return false !== $value ? $value : $default;
+        return $value ? $value : $default;
     }
 
     if ( class_exists( 'Redux' ) ) {

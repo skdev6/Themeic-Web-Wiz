@@ -4,7 +4,7 @@ html{
 }
 body{
     line-height:1.75rem;
-    font-family: "Sora", sans-serif;
+    font-family: var(--themeic-ff-base);
     background-color: var(--themeic-bg-body);
     color: var(--themeic-text-secondary);
     font-size: 0.875rem;
@@ -13,26 +13,35 @@ body{
     }
 }
 .title-h1,.title-h2,.title-h3,.title-h4,.title-h5,.title-h6,h1,h2,h3,h4,h5,h6{
-    font-family: "Big Shoulders", sans-serif;
     font-weight: 400;
     margin-top: 0;
     margin-bottom: .8rem;
     color: var(--themeic-text-primary);
     line-height:122%;  
 }
+.title-h1,.title-h2,.title-h3,.title-h4,.title-h5,.title-h6,h1,h2,h3,h4,h5,h6{
+    font-family: var(--themeic-ff-headings);
+}
 .auto-title-space{
     margin-bottom:.9em; 
 }
 
 .title-h1,h1{
-    font-size: 6rem; // 128px
+    font-size: 3rem;
     @include xl{
         font-size: 8rem; // 128px
     }
+    @include max_md{
+        font-size: 4rem; 
+    }
 }
 .title-h2,h2{
+    font-size: 2.8rem;
     @include xl{
         font-size: 4.5rem; // 72px
+    }
+    @include max_md{
+        font-size:2.3rem;
     }
 }
 .title-h3,h3{ 
@@ -44,10 +53,22 @@ body{
         font-size:2.3rem;
     }
 }
-.title-h4,h4{
+.title-h4,h4,.comment-reply-title,.comments-title{  
+    font-size:1.625rem;
+    @include xl{
+        font-size: 2rem; // 32px
+    }
+}
+.title-h5,h5{
     font-size: 1.55rem;
     @include xl{
         font-size: 1.75rem; // 28px
+    }
+}
+.title-h6,h6,.comments-area .comment-author{
+    font-size: 1.125rem;
+    @include xl{
+        font-size:1.25rem; // 20px
     }
 }
 .text-lg{
@@ -60,15 +81,15 @@ body{
 .text-md{
     font-size: 0.8rem;
     @include lg{
-        font-size: 0.875rem;
+        font-size: 0.875rem; //14px
     }
     line-height: 130%;
 }
-.text-sm{
+.text-sm,.comment-metadata > a{
     line-height: 130%;
     font-size:0.69rem; 
     @include lg{
-        font-size: 0.75rem;
+        font-size: 0.75rem; //12px
     }
 }
 .display-h1{

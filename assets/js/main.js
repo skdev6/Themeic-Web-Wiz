@@ -23,7 +23,7 @@
         });
 
         // Desktop Submenu Hover (only on hover-supported devices)
-        if (window.matchMedia('(hover: hover)').matches) {
+        if (window.matchMedia('(hover: hover)').matches && !$scope.hasClass('hide-hover-overlay')) {
             $scope.find('.header-navbar > li > .sub-menu')
                 .parent('li')
                 .off('mouseenter.themeicHeader mouseleave.themeicHeader')
@@ -261,7 +261,9 @@
     }
 
     // Normal init
-    init_header($('.header-area-wrap'));
+    $('.header-area-wrap').each(function(){
+        init_header($(this));
+    })
 
 
 })(jQuery);

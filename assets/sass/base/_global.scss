@@ -1,6 +1,6 @@
 :root,html.light-mode{
   /* Smooth UI */
-  --th-transition-smooth: all .5s cubic-bezier(.4,0,.2,1);
+  --th-transition-smooth: all .25s cubic-bezier(.4,0,.2,1);
 
   /* Expo */
   --th-transition-expo-out: all .5s cubic-bezier(0.16,1,0.3,1);
@@ -25,6 +25,11 @@
   --themeic-submenu-bg:#ffffff;
   --themeic-submenu-item-bg:#dee5ea;
   --themeic-bg-body:#F3F7FA;
+  --themeic-bg-on-base-rgb:255, 255, 255;
+  --themeic-color-alpha:1;
+  --themeic-bg-on-base:rgba(var(--themeic-bg-on-base-rgb), var(--themeic-color-alpha));
+  --themeic-bg-primary-inverse:#000000;
+  --themeic-bg-muted: var(--themeic-border-muted-extra);
   --themeic-bg-gradient-muted-opacity-top:1;
   --themeic-bg-gradient-muted:linear-gradient(to bottom, rgba(255,255,255, var(--themeic-bg-gradient-muted-opacity-top)) 0%,rgba(243,247,250,1) 100%);
 
@@ -41,13 +46,18 @@
   --themeic-border-muted:rgba(0,0,0,0.16);
   --themeic-border-muted-extra:rgba(0, 0, 0, 0.05);
   --themeic-border-subtle:rgba(0,0,0,0.08);
+
+  --themeic-ff-headings:"Big Shoulders", sans-serif;
+  --themeic-ff-base:"Sora", sans-serif;
 }
 /* System Dark Mode */
 @media (prefers-color-scheme: dark){
   :root{
-  --themeic-submenu-item-bg:hsla(0,0%,100%,.125);
-  --themeic-submenu-bg:#222;
+    --themeic-submenu-item-bg:hsla(0,0%,100%,.125);
+    --themeic-submenu-bg:#222;
     --themeic-bg-body:#111111; 
+    --themeic-bg-on-base-rgb:29, 29, 29;
+    --themeic-bg-primary-inverse:#fff;
     --themeic-bg-gradient-muted:linear-gradient(to bottom, rgba(21, 21, 21, var(--themeic-bg-gradient-muted-opacity-top)) 0%,rgb(17, 17, 17) 100%);
 
     --themeic-show-light:none;
