@@ -26,9 +26,9 @@ function web_wiz_option( $key, $default = false ) {
     return $default;
 }
 
-function web_wiz_meta( $field, $id = null ) {
+function web_wiz_meta( $field, $id = null, $default = false ) {
     if ( empty( $field ) || ! is_string( $field ) ) {
-        return false;
+        return $default;
     }
 
     // Resolve ID: use passed value or current post
@@ -37,7 +37,7 @@ function web_wiz_meta( $field, $id = null ) {
     }
 
     if ( empty( $id ) || ! is_numeric( $id ) ) {
-        return false;
+        return $default;
     }
 
     $id = absint( $id );   // safer than (int)
@@ -46,5 +46,26 @@ function web_wiz_meta( $field, $id = null ) {
         return get_themeic_framework_meta( $field, $id );
     }
 
-    return get_post_meta( $id, $field, true );
+    if(get_post_meta( $id, $field, true )){
+        return get_post_meta( $id, $field, true );
+    }
+    return $default;
+}
+
+function web_wiz_init_before_pt(){
+    $is_ajax_page_transition = web_wiz_option("is_ajax_page_transition");
+
+    if($is_ajax_page_transition){
+        $pt_slug = '';
+        $current_page = get_queried_object();
+        if ( isset( $current_page->post_name ) ) {
+            $pt_slug = $current_page->post_name;
+        }
+        echo '<div data-themeic-ajax-template="wrap"><div data-themeic-ajax-template="container" data-themeic-ajax-template-namespace="'. $pt_slug .'">';
+    }
+}
+function web_wiz_init_after_pt(){
+    $is_ajax_page_transition = web_wiz_option("is_ajax_page_transition");
+
+    if($is_ajax_page_transition) echo '</div></div>';
 }

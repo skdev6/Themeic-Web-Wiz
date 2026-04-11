@@ -8,10 +8,10 @@
  *
  * @package Web_Wiz
  */
-
+$color_mode = web_wiz_option('default_color_mode_settings');
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> class="light-mode">
+<html <?php language_attributes(); ?> class="<?php echo $color_mode ? esc_attr($color_mode) : ''; ?>">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,5 +24,6 @@
 <?php wp_body_open(); ?>
 
 <main id="page__root" class="page__root">
-
-	<?php web_wiz_get_header_template(); ?>
+	<header class="header-content-area"><?php web_wiz_get_header_template(); ?></header>
+	
+	<?php web_wiz_init_before_pt(); ?>

@@ -37,7 +37,7 @@
     font-size:.81rem; 
     font-weight: 400;
     transition: var(--th-transition-expo-out);
-    color: var(--themeic-text-primary);
+    color: var(--themeic-color-content-primary);
     border-radius: 5px;
     @include md{ 
        font-size: .9rem;
@@ -52,8 +52,8 @@
         --open-close-y:calc(100% + 10px);
         display: block;
         .close,.open{
-    transition: var(--th-transition-expo-out);
-    display: block;
+            transition: var(--th-transition-expo-out);
+            display: block;
         }
         .close{
             position: absolute;
@@ -74,7 +74,7 @@
             height: 1px;
             position: absolute;
             left: 0;
-    transition: var(--th-transition-expo-out);
+            transition: var(--th-transition-expo-out);
         }
         &::before{
             top: 1px;
@@ -107,7 +107,7 @@
     }
 }
 .btn-menu-toggle.with-border{ 
-    border: 1px solid var(--themeic-border-muted);
+    border: 1px solid var(--themeic-color-outline-medium);
     padding:0.416em 1.805em; 
     &:hover{
         border-color: var(--themeic-border-strong);
@@ -119,8 +119,8 @@
     gap:.9rem;
 }
 .th-btn,.comment-edit-link,.comment-reply-link,.comments-area .comment-form input[type="submit"]{
-    border: 1px solid var(--themeic-border-muted);
-    color: var(--themeic-text-primary);
+    border: 1px solid var(--themeic-color-outline-medium);
+    color: var(--themeic-color-content-primary);
     text-decoration: none;
     font-size: 0.875rem;
     padding: 0.55rem 2.2rem;
@@ -162,7 +162,7 @@
         }
     }
     &:hover{
-        background-color: var(--themeic-border-muted-extra);
+        background-color: var(--themeic-color-outline-weak); 
         border-color: transparent;
         .btn-text .word,.btn-text .char{
             transform: translateY(-2em);
@@ -189,24 +189,24 @@
     line-height: 100%;
 }
 .th-btn.th-btn-primary,.comments-area .comment-form input[type=submit]{
-    background-color: var(--themeic-bg-primary-inverse);
+    background-color: var(--themeic-color-content-primary);
     border-color: transparent;
-    color: var(--themeic-text-primary-inverse); 
+    color: var(--themeic-color-content-primary-inverse); 
     &:hover{
         background-color:transparent;
-        border-color: var(--themeic-bg-primary-inverse); 
-        color: var(--themeic-text-primary); 
+        border-color: var(--themeic-color-content-primary); 
+        color: var(--themeic-color-content-primary); 
     }
 }
 .th-btn.th-btn-secondary,.comment-edit-link{
     background-color: var(--themeic-bg-muted);
     border-color: transparent;
     &:hover{
-        background-color: var(--themeic-bg-primary-inverse);
-        color: var(--themeic-text-primary-inverse);
+        background-color: var(--themeic-color-content-primary);
+        color: var(--themeic-color-content-primary-inverse);
     }
 }
 .btn-grp-wrap {
     display: flex;
     gap: .6rem;
-} 
+}

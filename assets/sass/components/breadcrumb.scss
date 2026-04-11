@@ -19,7 +19,7 @@
     a{
         text-decoration: none;
         font-size: 1em;
-        color: var(--themeic-text-primary);
+        color: var(--themeic-color-content-primary);
     }
 }
 .social-icons{
@@ -30,7 +30,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     a{
-        color: var(--themeic-text-secondary);
+        color: var(--themeic-color-content-secondary);
         text-decoration: none;
     }
 }

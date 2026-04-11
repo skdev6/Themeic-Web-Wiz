@@ -2,9 +2,13 @@
 /**
  * Page Hero Section
  */
+$post_id = get_queried_object_id(); 
+
+// apply_filters( 'web_wiz_elementor_page_title', true ) &&  || web_wiz_meta('is_themeic_hero', $post_id, true)
+
+if (web_wiz_meta('is_themeic_hero', $post_id, true) === '1') :
 
 // Get custom hero title from meta 
-$post_id = get_queried_object_id();
 
 $hero_title = web_wiz_meta( 'hero_custom_title', $post_id);
 
@@ -48,3 +52,5 @@ if ( empty( $hero_title ) ) {
         </div>
     </div>
 </section>
+
+<?php endif; ?>

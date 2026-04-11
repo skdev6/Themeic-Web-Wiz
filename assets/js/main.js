@@ -34,6 +34,53 @@
                     $(this).closest('.header-area-wrap').removeClass('active-sub-menu');
                 });
         }
+        // Desktop Mega Menu Hover (only on hover-supported devices)
+        if (window.matchMedia('(hover: hover)')) { 
+            
+            $scope.find('.header-navbar .has-themeic-mega-menu')
+                .off('mouseenter.themeicHeader mouseleave.themeicHeader')
+                .on('mouseenter.themeicHeader', function () {
+                    let megamenu = $(this).find("> .themeic-mega-menu");
+                    
+                    gsap.to(megamenu, {
+                        autoAlpha:1,
+                        duration:.2,
+                        ease:'expo.out'
+                    })
+                    gsap.to(megamenu, {
+                        width:'auto',
+                        height:'auto',
+                        '--innerY':"0%",
+                        '--innerX':"0%",
+                        '--inner-scale':1,
+                        duration:.5,
+                        borderRadius:megamenu.css('--real-radius'),
+                        ease:'expo.out'
+                    })
+                    
+                })
+                .on('mouseleave.themeicHeader', function () {
+                    let megamenu = $(this).find("> .themeic-mega-menu");
+                    
+                    gsap.to(megamenu, {
+                        autoAlpha:0,
+                        duration:.4,
+                        delay:.3,
+                        ease:'expo.out'
+                    })
+                    gsap.to(megamenu, { 
+                        width:'100%',
+                        height:'100%',
+                        '--innerY':"50%",
+                        '--innerX':"-33.33%",
+                        '--inner-scale':.5,
+                        duration:.5,
+                        borderRadius:megamenu.css('--initial-radius'),
+                        ease:'expo.out'
+                    })
+                    
+                });
+        }
 
         // Set submenu item animation index
         $scope.find('.header-navbar .sub-menu').each(function () {
@@ -265,5 +312,13 @@
         init_header($(this));
     })
 
+    if(typeof themeicCore !== 'undefined' && typeof themeicCore?.PT?.on === 'function'){     
+        themeicCore.PT.on('after', function(data){
+            $('.header-area-wrap').each(function(){
+                init_header($(this));
+            })
+        })
+    }
+    
 
 })(jQuery);

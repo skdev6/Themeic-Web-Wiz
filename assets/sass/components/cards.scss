@@ -29,7 +29,7 @@
     .author-info{
         > a{
             font-size:0.8rem;
-            color: var(--themeic-text-primary);
+            color: var(--themeic-color-content-primary);
             text-decoration: none; 
             font-weight: 600;
             @include lg{

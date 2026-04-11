@@ -5,8 +5,8 @@ html{
 body{
     line-height:1.75rem;
     font-family: var(--themeic-ff-base);
-    background-color: var(--themeic-bg-body);
-    color: var(--themeic-text-secondary);
+    background-color: var(--themeic-color-surface);
+    color: var(--themeic-color-content-secondary);
     font-size: 0.875rem;
     @include lg{
         font-size: 1rem;
@@ -16,7 +16,7 @@ body{
     font-weight: 400;
     margin-top: 0;
     margin-bottom: .8rem;
-    color: var(--themeic-text-primary);
+    color: var(--themeic-color-content-primary);
     line-height:122%;  
 }
 .title-h1,.title-h2,.title-h3,.title-h4,.title-h5,.title-h6,h1,h2,h3,h4,h5,h6{

@@ -134,6 +134,27 @@ function web_wiz_widgets_init() {
 }
 add_action( 'widgets_init', 'web_wiz_widgets_init' );
 
+
+if ( ! function_exists( 'web_wiz_elementor_check_hide_title' ) ) {
+	/**
+	 * Check whether to display the page title.
+	 *
+	 * @param bool $val default value.
+	 *
+	 * @return bool
+	 */
+	function web_wiz_elementor_check_hide_title( $val ) {
+		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+			$current_doc = Elementor\Plugin::instance()->documents->get( get_the_ID() );
+			if ( $current_doc && 'yes' === $current_doc->get_settings( 'hide_title' ) ) {
+				$val = false;
+			}
+		}
+		return $val;
+	}
+}
+add_filter( 'web_wiz_elementor_page_title', 'web_wiz_elementor_check_hide_title' );
+
 /**
  * All Helper Functions
  */

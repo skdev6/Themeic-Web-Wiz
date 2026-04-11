@@ -21,7 +21,7 @@
         a{
             color: currentColor;
             &:hover{
-                color: var(--themeic-text-primary);
+                color: var(--themeic-color-content-primary);
             }
         }
     }
@@ -33,7 +33,7 @@
             font-family: var(--themeic-ff-base);
             line-height: 1;
             a{
-                 color: var(--themeic-text-primary);
+                 color: var(--themeic-color-content-primary);
             }
         }
     }
@@ -63,7 +63,7 @@
     .comment-author{ 
         font-family: var(--themeic-ff-headings);
         a{
-            color: var(--themeic-text-primary);
+            color: var(--themeic-color-content-primary);
             text-decoration: none;
         }
         span.says{
@@ -95,7 +95,7 @@
         line-height: 1;
         margin-top: 0.188rem;
         > a{
-            color: var(--themeic-text-secondary);
+            color: var(--themeic-color-content-secondary);
             text-decoration: none;
         }
     }

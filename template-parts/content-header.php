@@ -14,6 +14,10 @@ $burger_menu        = web_wiz_option( 'burger_menu_show_hide' );
 $header_btns        = web_wiz_option( 'header_btns_show_hide' );
 $color_mode_res     = web_wiz_option( 'header_color_mode_show_hide' );
 $is_copy_custom     = web_wiz_option( 'is-header-custom-copy-text' );
+$navbar_style       = web_wiz_option( 'header-navbar-style' ) ? web_wiz_option( 'header-navbar-style' ) : "nav-style-rounded";
+$navbar_align_style = web_wiz_option( 'header-menu-align-style' ) ? web_wiz_option( 'header-menu-align-style' ) : "navbar-abs-center";
+$items_hover_over   = web_wiz_option( 'is-header-hover-overlay' ) ? "" : 'hide-hover-overlay';
+$header_space_y     = $navbar_align_style === "navbar-abs-center" ? "header-py" : "";
 
 $logo_light = ( is_array( $logo_light ) && ! empty( $logo_light['url'] ) )
     ? $logo_light['url']
@@ -23,18 +27,19 @@ $logo_dark = ( is_array( $logo_dark ) && ! empty( $logo_dark['url'] ) )
     ? $logo_dark['url']
     : get_template_directory_uri() . '/assets/img/logo.svg';
 
-$navbar_responsive = is_array( $navbar_responsive ) ? implode( ' ', $navbar_responsive ) : 'd-none d-lg-flex';
-$burger_menu       = is_array( $burger_menu ) ? implode( ' ', $burger_menu ) : 'd-lg-none';
-$header_btns       = is_array( $header_btns ) ? implode( ' ', $header_btns ) : '';
-$color_mode_res    = is_array( $color_mode_res ) ? implode( ' ', $color_mode_res ) : '';
+$navbar_responsive                = is_array( $navbar_responsive ) ? implode( ' ', $navbar_responsive ) : 'd-none d-lg-flex';
+$burger_menu                      = is_array( $burger_menu ) ? implode( ' ', $burger_menu ) : 'd-lg-none';
+$header_btns                      = is_array( $header_btns ) ? implode( ' ', $header_btns ) : '';
+$color_mode_res                   = is_array( $color_mode_res ) ? implode( ' ', $color_mode_res ) : '';
+$navbar_styles                    = $navbar_responsive .' '. $navbar_style .' '. $navbar_align_style;
+$navbar_right_content_right_align = $navbar_align_style === 'mr-space-12 ml-auto' ||  $navbar_align_style === 'ml-auto mr-auto' ? 'ml-auto ml-lg-0' : 'ml-auto';
 
 $site_name = get_bloginfo( 'name' );
 ?>
 
-<header class="themeic__header header-area-wrap hide-hover-overlay fixed-header">
+<div class="themeic__header header-area-wrap fixed-header <?php echo esc_attr($items_hover_over); ?>">
     <div class="header-overlay"></div>
-
-    <div class="header-area header-py">
+    <div class="header-area <?php echo esc_attr($header_space_y); ?>">
         <div class="header-container d-flex align-items-center">
 
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" aria-label="<?php echo esc_attr( $site_name ); ?>">
@@ -58,15 +63,29 @@ $site_name = get_bloginfo( 'name' );
                     array(
                         'theme_location' => 'primary-menu',
                         'container'      => false,
-                        'menu_class'     => 'header-navbar nav-style-rounded navbar-abs-center bg-on-base ml-auto mr-auto ' . esc_attr( $navbar_responsive ),
+                        'menu_class'     => 'has-pt-nav-slide header-navbar ' . $navbar_styles,
                         'fallback_cb'    => false,
                     )
                 );
                 ?>
             <?php endif; ?>
 
-            <div class="ml-auto d-flex align-items-center gap-x-53">
+            <div class="<?php echo esc_attr($navbar_right_content_right_align); ?> d-flex align-items-center gap-x-53">
+                <?php if ( ! empty( $is_copy ) ) : ?>
+                    <div class="header-copyright th-text-secondary d-none d-lg-block">
+                        <?php
+                        if ( 'cusom' === $is_copy_custom ) {
+                            $copy_text = web_wiz_option( 'header-copy-text' );
 
+                            if ( ! empty( $copy_text ) ) {
+                                echo wp_kses_post( $copy_text );
+                            }
+                        } else {
+                            echo esc_html( '© ' . wp_date( 'Y' ) );
+                        }
+                        ?>
+                    </div>
+                <?php endif; ?>
                 <?php if ( is_array( $call_to_btns ) && ! empty( $call_to_btns['redux_repeater_data'] ) ) : ?>
                     <div class="btn-grp-wrap <?php echo esc_attr( $header_btns ); ?>">
                         <?php foreach ( $call_to_btns['redux_repeater_data'] as $key => $btn ) : ?>
@@ -94,22 +113,6 @@ $site_name = get_bloginfo( 'name' );
                         <i class="themeic-icon-color-mode th-icon" aria-hidden="true"></i>
                     </span>
                 </button>
-
-                <?php if ( ! empty( $is_copy ) ) : ?>
-                    <div class="header-copyright th-text-secondary d-none d-lg-block">
-                        <?php
-                        if ( 'cusom' === $is_copy_custom ) {
-                            $copy_text = web_wiz_option( 'header-copy-text' );
-
-                            if ( ! empty( $copy_text ) ) {
-                                echo wp_kses_post( $copy_text );
-                            }
-                        } else {
-                            echo esc_html( '© ' . wp_date( 'Y' ) );
-                        }
-                        ?>
-                    </div>
-                <?php endif; ?>
 
                 <div class="toggle-btn-wrap <?php echo esc_attr( $burger_menu ); ?>">
                     <div class="toggle-btn-inner">
@@ -186,4 +189,4 @@ $site_name = get_bloginfo( 'name' );
 
         </div>
     </div>
-</header>
+</div>

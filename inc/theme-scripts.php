@@ -60,3 +60,15 @@ function web_wiz_fonts_style() {
 }
 
 add_action( 'wp_enqueue_scripts', 'web_wiz_fonts_style' );
+
+$primary_color = web_wiz_option('light_themeic_primary_color');
+
+add_action('wp_head', function() {
+    ?>
+    <style id="web-wiz-dynamic-css">  
+        :root {
+            --primary-color: <?php echo web_wiz_option('light_themeic_primary_color', '#0073aa'); ?>;
+        }
+    </style>
+    <?php
+});
