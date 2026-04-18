@@ -8,11 +8,8 @@
  *
  * @package Web_Wiz
  */
-web_wiz_init_after_pt(); 
-
 ?>
 <footer class="footer-content-area"><?php web_wiz_get_footer_template(); ?></footer>
-</main><!-- #page -->
 
 <?php wp_footer(); ?>
 

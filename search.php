@@ -8,6 +8,7 @@
  */
 
 get_header();
+web_wiz_init_before_pt();
 ?>
 
 	<main id="primary" class="site-main">
@@ -49,5 +50,5 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+web_wiz_init_after_pt();
 get_footer();

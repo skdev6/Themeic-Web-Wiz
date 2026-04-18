@@ -23,7 +23,4 @@ $color_mode = web_wiz_option('default_color_mode_settings');
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<main id="page__root" class="page__root">
 	<header class="header-content-area"><?php web_wiz_get_header_template(); ?></header>
-	
-	<?php web_wiz_init_before_pt(); ?>

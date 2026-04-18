@@ -94,3 +94,15 @@ function web_wiz_get_archive_template( $template_slug = 'template-parts/content-
         get_template_part( $template_slug );
     }
 }
+function web_wiz_get_404_template( $template_slug = 'template-parts/content-404' ) {
+    if ( class_exists( 'Themeic\\Framework\\Base' ) ) {
+        do_action(
+            'themeic_err404_builder',
+            array(
+                'default' => $template_slug,
+            )
+        );
+    } else {
+        get_template_part( $template_slug );
+    }
+}
