@@ -419,9 +419,10 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            @include max_xl{
+            @include max_xl{ 
                 position: fixed;
                 bottom: 1.875rem;
+                
             }
         }
     }
@@ -469,7 +470,7 @@
     opacity: 0;
     visibility: hidden;
     @include max-md{ 
-        width: calc(100% - var(--top) * 2);
+        width: calc(var(--win-w) - var(--initial-right) * 2);
     }
     @include max-xxl{ 
             --toggle-btn-x:-3.4rem;
