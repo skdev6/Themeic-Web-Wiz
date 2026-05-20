@@ -1,8 +1,7 @@
 import { addClass, removeClass } from "../utils/functions";
 
 function get_current_menu_item_info(nav, items, default_first = true) {
-    const activeItems = nav.querySelectorAll(':scope > .current-menu-parent, :scope > .current-menu-item, :scope > .active');
-    
+    const activeItems = nav.querySelectorAll(":scope > .current-menu-parent, :scope > .current-menu-item, :scope > .active");
     let menu_item = activeItems.length > 0 ? activeItems[0] : null;
 
     if (!menu_item && default_first && items.length > 0) {
@@ -17,70 +16,71 @@ function get_current_menu_item_info(nav, items, default_first = true) {
         left: menu_item.offsetLeft,
         top: menu_item.offsetTop,
         current: menu_item,
-        hasActive:activeItems.length ? true : false
+        hasActive: Boolean(activeItems.length)
     };
 }
 
 function add_pt_navbar_slide(nav) {
     let navbar = nav;
-    let navItems = nav.querySelectorAll(':scope > li');
+    let navItems = nav.querySelectorAll(":scope > li");
 
-    // Fallback to internal UL if the parent is just a wrapper
     if (!navItems.length) {
-        let newUl = nav.querySelector('ul');
+        const newUl = nav.querySelector("ul");
         if (newUl) {
             navbar = newUl;
-            navItems = newUl.querySelectorAll(':scope > li');
+            navItems = newUl.querySelectorAll(":scope > li");
         } else {
             return false;
         }
     }
-    addClass(navbar, 'has-nav-slide-ind');
-    // Fix: Added dots to selectors
-    if (!navbar.querySelector('.nav-indicator-back')) {  
-        let indicator = document.createElement('span');
-        let indicator2 = document.createElement('span');
-        indicator.classList.add('nav-indicator-back');
-        indicator2.classList.add('nav-indicator-front');
+
+    addClass(navbar, "has-nav-slide-ind");
+
+    if (!navbar.querySelector(".nav-indicator-back")) {
+        const indicator = document.createElement("span");
+        const indicator2 = document.createElement("span");
+        indicator.classList.add("nav-indicator-back");
+        indicator2.classList.add("nav-indicator-front");
         
         navbar.appendChild(indicator);
         navbar.appendChild(indicator2);
     }
 
-    let indicatorBack = navbar.querySelector('.nav-indicator-back');
-    let indicatorFront = navbar.querySelector('.nav-indicator-front');  
+    const indicatorBack = navbar.querySelector(".nav-indicator-back");
+    const indicatorFront = navbar.querySelector(".nav-indicator-front");
+    const cleanups = [];
 
-    function int_ind(back = true, front = true, duration = .4) {
-        // Assuming this helper function exists in your project
+    function int_ind(back = true, front = true, duration = 0.4) {
+        if (typeof gsap === "undefined") return;
+
         const currentInfo = get_current_menu_item_info(navbar, navItems, true);
-        let items = [];
+        const items = [];
         if (back) items.push(indicatorBack);
         if (front) items.push(indicatorFront);
 
-        gsap.to(items, { // Use .to for a smooth reset
+        gsap.to(items, {
             duration,
             ease: "power2.out",
-            position: 'absolute',
-            'pointer-events': 'none',
+            position: "absolute",
+            "pointer-events": "none",
             left: currentInfo.left,
             top: currentInfo.top,
             width: currentInfo.width,
             height: currentInfo.height,
-            '--opacity':currentInfo.hasActive ? 1 : 0
+            "--opacity": currentInfo.hasActive ? 1 : 0
         });
     }
 
-    // Initial position
     int_ind(true, true, 0);  
 
     let navTimeout;
-    navItems.forEach(item => { 
-        item.addEventListener('mouseenter', () => {
-            // 1. Cancel any pending reset to the "current" item
+    navItems.forEach(item => {
+        const onMouseEnter = () => {
             if (navTimeout) clearTimeout(navTimeout);
 
-            gsap.killTweensOf(indicatorBack);
+            if (typeof gsap === "undefined") return;
 
+            gsap.killTweensOf(indicatorBack);
             gsap.to(indicatorBack, {
                 duration: 0.35,
                 ease: "power2.out",
@@ -88,57 +88,67 @@ function add_pt_navbar_slide(nav) {
                 top: item.offsetTop,
                 width: item.offsetWidth,
                 height: item.offsetHeight,
-                overwrite: true // Ensure this animation wins
+                overwrite: true
             });
-            indicatorBack.classList.add('active');
-        });
-        item.addEventListener('mouseleave', () => {
+            indicatorBack.classList.add("active");
+        };
+        const onMouseLeave = () => {
             navTimeout = setTimeout(() => {
-                int_ind(true, false); // Returns to current active item
-                indicatorBack.classList.remove('active');
-            }, 80); // 80ms is the "sweet spot" for human eye persistence
-        });
+                int_ind(true, false);
+                indicatorBack.classList.remove("active");
+            }, 80);
+        };
+
+        item.addEventListener("mouseenter", onMouseEnter);
+        item.addEventListener("mouseleave", onMouseLeave);
+        cleanups.push(() => item.removeEventListener("mouseenter", onMouseEnter));
+        cleanups.push(() => item.removeEventListener("mouseleave", onMouseLeave));
     });
 
-    window.addEventListener('resize', () => int_ind(true, true));  
+    const onResize = () => int_ind(true, true);
+    window.addEventListener("resize", onResize);
+    cleanups.push(() => window.removeEventListener("resize", onResize));
 
-    return {   
+    return {
         refreshBack() { int_ind(true, false); },
         refreshFront() { int_ind(false, true); },
         refresh() { int_ind(true, true); },
+        destroy() {
+            if (navTimeout) clearTimeout(navTimeout);
+            cleanups.forEach(cleanup => cleanup());
+            removeClass(navbar, "has-nav-slide-ind");
+        },
     };
 }
 
-export function initNavAni(selector = '.has-pt-nav-slide') {   
-    let navbarEl = document.querySelector(selector);
+export function initNavAni(selector = ".has-pt-nav-slide") {
+    const navbarEl = document.querySelector(selector);
     let nav = false;
+
     if (navbarEl) {
         nav = add_pt_navbar_slide(navbarEl);
     }
-    return{
-        hasInit:navbarEl ? true : false,
+
+    return {
+        hasInit: Boolean(navbarEl && nav),
         navbarEl,
         nav,
         add_pt_navbar_slide,
         get_current_menu_item_info
-    };  
+    };
 }
 
 export function updateNavItemsClass(oldNavbar, newNavbar) {
-    // 1. Target direct LI items
-    if(!oldNavbar || !newNavbar) return;  
+    if (!oldNavbar || !newNavbar) return;
 
-    const oldItems = oldNavbar.querySelectorAll('li');
-    const newItems = newNavbar.querySelectorAll('li');
+    const oldItems = oldNavbar.querySelectorAll("li");
+    const newItems = newNavbar.querySelectorAll("li");
 
     oldItems.forEach((oldItem, index) => {
         const newItem = newItems[index];
         
         if (newItem) {
-            // 2. Clear existing classes on the item we want to update
-            oldItem.className = '';
-
-            // 3. Convert oldItem classList to an array and apply to newItem
+            oldItem.className = "";
             const classesToAdd = Array.from(newItem.classList);
             
             if (classesToAdd.length > 0) {

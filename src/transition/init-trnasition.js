@@ -1,198 +1,199 @@
 import barba from '@barba/core';
-import { addClass, findAll, findClosest, getElements, hasClass, removeClass } from '../utils/functions';
+import { addClass, getElements, hasClass, removeClass } from '../utils/functions';
 import getHtml from './get-html';
 import { pt_fadeInOut } from './fade';
 import { adjustPageScripts, shouldBarbaHandle, updateHeaderAndFooter } from './helper';
 import { preventUrl } from './prevent-pt';
 import { initNavAni, updateNavItemsClass } from './navbar';
-import headerAni from './header';
 
-export default function initAjaxTrnasition(){
+export default function initAjaxTrnasition() {   
+    const ajaxWrap = getElements('[data-themeic-ajax-template="wrap"]');
 
-    let ajaxWrap = getElements('[data-themeic-ajax-template="wrap"]');
+    if (!ajaxWrap.length) return false;
+    if (hasClass(ajaxWrap[0], "initialized-themeic-ajax-pt")) return false;
 
-    if(ajaxWrap.length){
+    addClass(ajaxWrap[0], "initialized-themeic-ajax-pt");
+    addClass(document.documentElement, "has-themeic-pt");
 
-        let pageLoading = false;
+    const pt_nav = initNavAni();
+    const cleanups = [];   
 
-        if(hasClass(ajaxWrap[0], 'initialized-themeic-ajax-pt')) return false;
-        
-        addClass(ajaxWrap[0], 'initialized-themeic-ajax-pt');
-        addClass(document.querySelector('html'), 'has-themeic-pt');
-        
-        let settings = JSON.parse(ajaxWrap[0].getAttribute('data-pt-settings')); 
-        let pt_nav = initNavAni();
-        let headerDefaultAni = headerAni();
-
-        const emitter = {
-            events: {},
-            on(event, callback) {
-                if (!this.events[event]) this.events[event] = [];
-                this.events[event].push(callback);
-                return this;
-            },
-            off(event, callback) {
-                if (!this.events[event]) return;
-                if (!callback) delete this.events[event];
-                else this.events[event] = this.events[event].filter(cb => cb !== callback);
-                return this;
-            },
-            emit(event, data) {
-                if (!this.events[event]) return;
-                this.events[event].forEach(callback => callback(data));
-            },
-            offAll(event) {
-                if (event) {
-                    // Clear only a specific event's listeners
-                    delete this.events[event];
-                } else {
-                    // Clear EVERYTHING
-                    this.events = {};
-                }
-                return this;
+    const emitter = {
+        events: {},
+        on(event, callback) {
+            if (!event || typeof callback !== "function") return this;
+            if (!this.events[event]) this.events[event] = [];
+            this.events[event].push(callback);
+            return this;
+        },
+        off(event, callback) {
+            if (!this.events[event]) return this;
+            if (!callback) delete this.events[event];
+            else this.events[event] = this.events[event].filter(cb => cb !== callback);
+            return this;
+        },
+        emit(event, data) {
+            if (!this.events[event]) return;
+            this.events[event].forEach(callback => callback(data));
+        },
+        offAll(event) {
+            if (event) {
+                delete this.events[event];
+            } else {
+                this.events = {};
             }
-        };
+            return this;
+        }
+    };
+    
+    barba.init({
+        debug: true,
+        timeout: 5000,
+        prevent: data => preventUrl(data.el),
+        schema: {
+            prefix: "data-themeic-ajax-template",
+            wrapper: "wrap",
+            container: "container",
+            namespace: "name",
+        },
+        transitions: [
+            {
+                sync: true,
+                name: "default-transition",
 
-        barba.init({
-            debug:false,
-            // preventRunning:true,
-            timeout:5000,
-            prevent:(data)=>{
-                preventUrl(data.el); 
-            },
-            schema:{
-                prefix: 'data-themeic-ajax-template',
-                wrapper: 'wrap',
-                container: 'container',
-                namespace: 'name',
-                // limit: 0,
-                // html: '', 
-            },
-            transitions:[
-                {
-                    sync: true,
-                    name:'default-transition',
+                before(data) {
+                    const htmlData = getHtml(data);
+                    adjustPageScripts(htmlData?.nextHTML);
+                    emitter.emit("before", data);
+                },
+                leave(data) {
+                    const done = this.async();
+                    pt_fadeInOut(data, done);
+                    emitter.emit("leave", data);
+                },
+                afterEnter(data) {
+                    emitter.emit("afterEnter", data);
+
+                    updateHeaderAndFooter(data, null);
+
+                    if (!pt_nav.hasInit) {
+                        updateHeaderAndFooter(data);
+                        updateHeaderAndFooter(data, ".elementor-location-header", ".elementor-location-footer");
+                    }
+                },
+                after(data) {
+                    const htmlData = getHtml(data);
+
+                    emitter.emit("after", data);
+                    document.body.classList.remove("starting-themeic-pt");
+
+                    if (typeof elementorFrontend !== "undefined") {
+                        elementorFrontend.init();
+                    }
                     
-                    before(data){
-                        adjustPageScripts(getHtml(data)?.nextHTML);
-                        emitter.emit('before', data);
+                    updateEditLink(htmlData?.nextHTML);
 
-                        if(!pt_nav.hasInit){
-                            // headerDefaultAni.start();
-                        }
-                    },
-                    leave(data){
-                        let done = this.async();
-                        
-                        pt_fadeInOut(data, done);
-
-                        emitter.emit('leave', data);
-                    },
-                    afterEnter(data){
-                        emitter.emit('afterEnter', data);
-                        
-                        if(!pt_nav.hasInit){ 
-                            updateHeaderAndFooter(data);
-                            updateHeaderAndFooter(data, '.elementor-location-header', '.elementor-location-footer'); 
-                            // headerDefaultAni.end();  
-                        }
-                    },
-                    after(data){
-                        emitter.emit('after', data);
-                        document.body.classList.remove('starting-themeic-pt');
-                        pageLoading = false; 
-                        if(typeof elementorFrontend !== "undefined"){
-                            elementorFrontend.init();
-                        }
-                        updateeditlink(getHtml(data).nextHTML);
-                        if(pt_nav.hasInit){  
-                            updateNavItemsClass(pt_nav.navbarEl, getHtml(data).nextHTML.querySelector('.has-pt-nav-slide'));  
-                            pt_nav.nav.refresh();
-                        }
+                    if (pt_nav.hasInit) {
+                        const nextNavbar = htmlData?.nextHTML?.querySelector(".has-pt-nav-slide");
+                        updateNavItemsClass(pt_nav.navbarEl, nextNavbar);
+                        pt_nav.nav?.refresh();
                     }
                 }
-            ]
-        });
-
-        // 
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if(!link) return;
-            if (shouldBarbaHandle(link, e) && !preventUrl(link)) {
-                document.body.classList.add('starting-themeic-pt');
-                emitter.emit('click', e);
-                pageLoading = true;
             }
-            
-        });
+        ]
+    });
 
-        if(!document.querySelector('.circle-loader-wrap')) document.body.insertAdjacentHTML('beforeend', '<div class="circle-loader-wrap"><div class="circle-loader-inner"><div class="circle-spinner-loader"></div></div></div>'); 
+    const onClick = event => {
+        const link = event.target.closest("a");
+        if (!link) return;
 
-        let circle = document.querySelector('.circle-loader-wrap');
-
-        gsap.set(circle, { xPercent: -50, yPercent: -50 });
-
-        document.addEventListener('mousemove', function(e) {
-            if(circle) {
-                gsap.to(circle, {
-                    x: e.clientX, 
-                    y: e.clientY,
-                    duration: 0.5, // Add a little smoothing for that premium feel
-                    ease: "power2.out"
-                });
-            }
-        });
-        return{  
-            on: (event, callback) => emitter.on(event, callback),
-            off: (event, callback) => emitter.off(event, callback),
-            destroy:()=>{
-                barba.destroy();
-                emitter.offAll();
-                removeClass(ajaxWrap[0], 'initialized-themeic-ajax-pt');    
-                removeClass(document.querySelector('html'), 'has-themeic-pt');
-            },
-            pt_oject:barba
+        if (shouldBarbaHandle(link, event) && !preventUrl(link)) {
+            document.body.classList.add("starting-themeic-pt");
+            emitter.emit("click", event);
         }
+    };
 
+    document.addEventListener("click", onClick);
+    cleanups.push(() => document.removeEventListener("click", onClick));
+
+    if (!document.querySelector(".circle-loader-wrap")) {
+        document.body.insertAdjacentHTML("beforeend", '<div class="circle-loader-wrap"><div class="circle-loader-inner"><div class="circle-spinner-loader"></div></div></div>');
     }
-    return false;
+
+    const circle = document.querySelector(".circle-loader-wrap");
+
+    if (circle && typeof gsap !== "undefined") {
+        gsap.set(circle, { xPercent: -50, yPercent: -50 });
+    }
+
+    const onMouseMove = event => {
+        if (!circle || typeof gsap === "undefined") return;
+
+        gsap.to(circle, {
+            x: event.clientX,
+            y: event.clientY,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+    cleanups.push(() => document.removeEventListener("mousemove", onMouseMove));
+
+    return {
+        on: (event, callback) => emitter.on(event, callback),
+        off: (event, callback) => emitter.off(event, callback),
+        destroy: () => {
+            barba.destroy();
+            pt_nav.nav?.destroy?.();
+            cleanups.forEach(cleanup => cleanup());
+            emitter.offAll();
+            removeClass(ajaxWrap[0], "initialized-themeic-ajax-pt");
+            removeClass(document.documentElement, "has-themeic-pt");
+        },
+        pt_oject: barba
+    };
 }
 
-function updateeditlink(html){
-    const adminBar = document.querySelector('#wpadminbar');
+function updateEditLink(html) {
+    const adminBar = document.querySelector("#wpadminbar");
 
-    if (adminBar) {
-        // 2. Find the 'Edit' node from the incoming AJAX 'html' object
-        const newHeader = html.body.querySelector("#wpadminbar #wp-admin-bar-edit");
+    if (!adminBar || !html) return;
 
-        if (newHeader) {
-            // 3. Find the target container in the current live document
-            const currentEditBar = adminBar.querySelector('#wp-admin-bar-edit');
-            
-            if (currentEditBar) {
-                // Update the HTML content
-                currentEditBar.innerHTML = newHeader.innerHTML;
-            }
+    const newEditBar = html.body.querySelector("#wpadminbar #wp-admin-bar-edit");
+    if (!newEditBar) return;
 
-            // 4. Handle the Elementor Edit link update
-            const elEditLink = adminBar.querySelector('#wp-admin-bar-elementor_edit_page > a');
-            const newAnchor = newHeader.querySelector('a');
+    const currentEditBar = adminBar.querySelector("#wp-admin-bar-edit");
+    if (currentEditBar) {
+        currentEditBar.innerHTML = newEditBar.innerHTML;
+    }
 
-            if (elEditLink && newAnchor) {
-                const originalHref = newAnchor.getAttribute('href');
-                const updatedHref = updateURLParameter(originalHref, 'action', 'elementor');
-                const updatedHref2 = updateURLParameter(originalHref, 'action', 'edit');
-                
-                elEditLink.setAttribute('href', updatedHref);
-                newHeader.setAttribute('href', updatedHref2);
-            }
+    const elementorEditLink = adminBar.querySelector("#wp-admin-bar-elementor_edit_page > a");
+    const newAnchor = newEditBar.querySelector("a");
+
+    if (elementorEditLink && newAnchor) {
+        const originalHref = newAnchor.getAttribute("href");
+        const elementorHref = updateURLParameter(originalHref, "action", "elementor");
+        const editHref = updateURLParameter(originalHref, "action", "edit");
+
+        if (elementorHref) {
+            elementorEditLink.setAttribute("href", elementorHref);
+        }
+
+        if (editHref) {
+            newAnchor.setAttribute("href", editHref);
         }
     }
 }
 
 function updateURLParameter(url, param, value) {
-    if (!url) return '';
-    const newUrl = new URL(url);
-    newUrl.searchParams.set(param, value);
-    return newUrl.toString();
+    if (!url || !param) return "";
+
+    try {
+        const newUrl = new URL(url, window.location.href);
+        newUrl.searchParams.set(param, value);
+        return newUrl.toString();
+    } catch {
+        return "";
+    }
 }

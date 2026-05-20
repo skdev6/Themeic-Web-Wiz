@@ -103,7 +103,7 @@
             if (!toggleWrap.length || !burgerMenu.length) {
                 return;
             }
-
+            
             let toggleOffset = toggleWrap.offset();
             if (!toggleOffset) {
                 return;
@@ -119,14 +119,15 @@
             burgerInitial.scaleX = toggleWidth / menuWidth;
             burgerInitial.scaleY = toggleHeight / menuHeight;
 
+            burgerMenu.css({
+                '--initial-top': burgerInitial.top + 'px',
+                '--initial-right': burgerInitial.left + 'px',
+                '--win-w': $(window).innerWidth() + 'px',
+            });
+
             if (burgerMenu.hasClass('open')) {
                 return;
             }
-
-            burgerMenu.css({
-                '--initial-top': burgerInitial.top + 'px',
-                '--initial-right': burgerInitial.left + 'px'
-            });
 
             gsap.set(burgerMenu, {
                 scaleX: burgerInitial.scaleX,
@@ -172,7 +173,7 @@
             isBurgerOpen = true;
 
             let toggleX = burgerMenu.css('--toggle-btn-x') || 0;
-            let toggleY = burgerMenu.css('--toggle-btn-y') || 0;
+            let toggleY = 0;
             let top = burgerMenu.css('--top') || '0px';
             let right = burgerMenu.css('--right') || '0px';
 
@@ -302,6 +303,8 @@
         $(window)
             .off('resize.themeicHeader')
             .on('resize.themeicHeader', function () {
+                console.log("Resize");
+                
                 set_burger_pos();
                 setDynamicSubMenuIcon();
             });
@@ -312,13 +315,27 @@
         init_header($(this));
     })
 
-    if(typeof themeicThemeCore !== 'undefined'){
+    if(typeof themeicThemeCore !== 'undefined' && themeThemeCoreSettings.settings.isPageTransition){
         let pageTransition = themeicThemeCore.initAjaxTrnasition();
-        pageTransition.on('after', ()=>{
-            $('.header-area-wrap').each(function(){
-                init_header($(this));
+        if(pageTransition){
+            pageTransition.on('after', (data)=>{
+                $('.header-area-wrap').each(function(){
+                    init_header($(this));
+                })
             })
-        })
+        }
     }
+    if (themeThemeCoreSettings.settings.isSmoothScroll) {
+        const lenis = new Lenis();
+
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+    }
+    
 
 })(jQuery);

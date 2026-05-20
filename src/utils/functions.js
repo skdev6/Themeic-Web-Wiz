@@ -14,30 +14,29 @@ export function findClosest(el, selector) {
 }
 
 export function on(el, event, handler, options) {
-  if (!el) return;
+  if (!el || !event || typeof handler !== "function") return () => {};
 
   el.addEventListener(event, handler, options);
 
-  return () => el.removeEventListener(event, handler);
+  return () => el.removeEventListener(event, handler, options);
 }
 
 export function addClass(el, className) {
-  if (!el) return;
+  if (!el || !className) return;
   el.classList.add(className);
 }
 
 export function removeClass(el, className) {
-  if (!el) return;
+  if (!el || !className) return;
   el.classList.remove(className);
 }
 
 export function toggleClass(el, className) {
-  if (!el) return;
+  if (!el || !className) return;
   el.classList.toggle(className);
 }
 
 export function getElements(target, context = document) {
-
   if (!target) return [];
 
   if (typeof target === "string") {
@@ -55,8 +54,8 @@ export function getElements(target, context = document) {
 
   return [];
 }
-export function hasClass(elements, className) {
 
+export function hasClass(elements, className) {
   if (!elements || !className) return false;
 
   const list =
@@ -68,7 +67,5 @@ export function hasClass(elements, className) {
       ? Array.from(elements)
       : [];
 
-  return list.some(el =>
-    el?.classList?.contains(className)
-  );
+  return list.some(el => el?.classList?.contains(className));
 }

@@ -1,14 +1,31 @@
 <?php 
-function web_wiz_scripts() {  
+function web_wiz_scripts() {
+    $is_pt =   web_wiz_option("is_ajax_page_transition");
+
 	wp_enqueue_style( 'web-wiz-style', get_stylesheet_uri(), array(), THEMEIC_THEME_S_VERSION );
 	wp_enqueue_style ('themeic-grid', get_template_directory_uri() . '/assets/css/themeic-grid.min.css', array(), THEMEIC_THEME_S_VERSION, null);
 	wp_enqueue_style ('themeic-fonts', get_template_directory_uri() . '/assets/fonts/themeic-icon/style.css', array(), THEMEIC_THEME_S_VERSION, null);
+	wp_enqueue_style ('lenis', get_template_directory_uri() . '/assets/css/lenis.css', array(), THEMEIC_THEME_S_VERSION, null);
 	wp_enqueue_style ('web-wiz', get_template_directory_uri() . '/assets/css/style.css', array(), THEMEIC_THEME_S_VERSION, null);
 
 	wp_enqueue_script( 'gsap', get_template_directory_uri() . '/assets/js/gsap.min.js', array('jquery'), THEMEIC_THEME_S_VERSION, true );
 	wp_enqueue_script( 'ScrollTrigger', get_template_directory_uri() . '/assets/js/ScrollTrigger.min.js', array('jquery'), THEMEIC_THEME_S_VERSION, true );
+	wp_enqueue_script( 'lenis', get_template_directory_uri() . '/assets/js/lenis.min.js', array('jquery'), THEMEIC_THEME_S_VERSION, true );
 	wp_enqueue_script( 'themeic-theme-core', get_template_directory_uri() . '/assets/js/core/themeic-theme-core.umd.cjs', array('jquery'), THEMEIC_THEME_S_VERSION, true );
 	wp_enqueue_script( 'web-wiz-main', get_template_directory_uri() . '/assets/js/main.js', array(), THEMEIC_THEME_S_VERSION, true );
+
+    wp_localize_script(
+        'themeic-theme-core',
+        'themeThemeCoreSettings',
+        [
+            'nonce'   => wp_create_nonce( 'themeTheme_Core' ),
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'settings'    => [
+                'isPageTransition' => $is_pt === "1" || $is_pt === 1 || $is_pt === true,
+                'isSmoothScroll'  => true
+            ],
+        ]
+    );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

@@ -1,7 +1,13 @@
-export default function getHtml(data = false){
-    if(!data) return;
-    let parser = new DOMParser();
-    let nextHTML = parser.parseFromString(data.next.html, "text/html");
-    let currentHTML = parser.parseFromString(data.current.html, "text/html");
-    return{nextHTML,currentHTML}
+export default function getHtml(data = null) {
+    const next = data?.next?.html;
+    const current = data?.current?.html;
+
+    if (!next && !current) return null;
+
+    const parser = new DOMParser();
+
+    return {
+        nextHTML: next ? parser.parseFromString(next, "text/html") : null,
+        currentHTML: current ? parser.parseFromString(current, "text/html") : null
+    };
 }
