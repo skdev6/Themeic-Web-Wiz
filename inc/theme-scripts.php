@@ -1,14 +1,14 @@
 <?php 
-function web_wiz_scripts() {
-	wp_enqueue_style( 'web-wiz-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_style ('themeic-grid', get_template_directory_uri() . '/assets/css/themeic-grid.min.css', array(), _S_VERSION, null);
-	wp_enqueue_style ('themeic-fonts', get_template_directory_uri() . '/assets/fonts/themeic-icon/style.css', array(), _S_VERSION, null);
-	wp_enqueue_style ('web-wiz', get_template_directory_uri() . '/assets/css/style.css', array(), _S_VERSION, null);
+function web_wiz_scripts() {  
+	wp_enqueue_style( 'web-wiz-style', get_stylesheet_uri(), array(), THEMEIC_THEME_S_VERSION );
+	wp_enqueue_style ('themeic-grid', get_template_directory_uri() . '/assets/css/themeic-grid.min.css', array(), THEMEIC_THEME_S_VERSION, null);
+	wp_enqueue_style ('themeic-fonts', get_template_directory_uri() . '/assets/fonts/themeic-icon/style.css', array(), THEMEIC_THEME_S_VERSION, null);
+	wp_enqueue_style ('web-wiz', get_template_directory_uri() . '/assets/css/style.css', array(), THEMEIC_THEME_S_VERSION, null);
 
-	wp_enqueue_script( 'gsap', get_template_directory_uri() . '/assets/js/gsap.min.js', array('jquery'), _S_VERSION, true );
-	wp_enqueue_script( 'ScrollTrigger', get_template_directory_uri() . '/assets/js/ScrollTrigger.min.js', array('jquery'), _S_VERSION, true );
-	wp_enqueue_script( 'SplitText', get_template_directory_uri() . '/assets/js/SplitText.min.js', array('jquery'), _S_VERSION, true );
-	wp_enqueue_script( 'web-wiz-main', get_template_directory_uri() . '/assets/js/main.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'gsap', get_template_directory_uri() . '/assets/js/gsap.min.js', array('jquery'), THEMEIC_THEME_S_VERSION, true );
+	wp_enqueue_script( 'ScrollTrigger', get_template_directory_uri() . '/assets/js/ScrollTrigger.min.js', array('jquery'), THEMEIC_THEME_S_VERSION, true );
+	wp_enqueue_script( 'themeic-theme-core', get_template_directory_uri() . '/assets/js/core/themeic-theme-core.umd.cjs', array('jquery'), THEMEIC_THEME_S_VERSION, true );
+	wp_enqueue_script( 'web-wiz-main', get_template_directory_uri() . '/assets/js/main.js', array(), THEMEIC_THEME_S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

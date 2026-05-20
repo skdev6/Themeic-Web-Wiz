@@ -56,6 +56,6 @@ function web_wiz_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function web_wiz_customize_preview_js() {
-	wp_enqueue_script( 'web-wiz-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
+	wp_enqueue_script( 'web-wiz-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), THEMEIC_THEME_S_VERSION, true );
 }
 add_action( 'customize_preview_init', 'web_wiz_customize_preview_js' );

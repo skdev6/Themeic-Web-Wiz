@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $theme_info = wp_get_theme();
 
-define( '_S_VERSION', $theme_info->get("Version") );
+define( 'THEMEIC_THEME_S_VERSION', $theme_info->get("Version") );
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.

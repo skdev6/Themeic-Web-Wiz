@@ -312,13 +312,13 @@
         init_header($(this));
     })
 
-    if(typeof themeicCore !== 'undefined' && typeof themeicCore?.PT?.on === 'function'){     
-        themeicCore.PT.on('after', function(data){
+    if(typeof themeicThemeCore !== 'undefined'){
+        let pageTransition = themeicThemeCore.initAjaxTrnasition();
+        pageTransition.on('after', ()=>{
             $('.header-area-wrap').each(function(){
                 init_header($(this));
             })
         })
     }
-    
 
 })(jQuery);
