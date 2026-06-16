@@ -337,5 +337,27 @@
         gsap.ticker.lagSmoothing(0);
     }
     
+    
+    function set_header_variable(){   
+        $('.header-area-wrap').each(function(){
+            let header = $(this);
+            console.log(header.offset());
+            
+            gsap.set($(this), {
+                '--header-centered':header.offset().top + (header.innerHeight() / 2) + "px"
+            })
+        })
+    }
+    set_header_variable();
+
+    $(window).on('resize', set_header_variable);  
+    
+    $(window).on('scroll', function(){
+        if($(this).scrollTop() > 100){
+            $('html').addClass('do-sticky');
+        }else{
+            $('html').removeClass('do-sticky');
+        }
+    });
 
 })(jQuery);

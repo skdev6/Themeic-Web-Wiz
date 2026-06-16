@@ -35,27 +35,20 @@ $navbar_styles                    = $navbar_responsive .' '. $navbar_style .' '.
 $navbar_right_content_right_align = $navbar_align_style === 'mr-space-12 ml-auto' ||  $navbar_align_style === 'ml-auto mr-auto' ? 'ml-auto ml-lg-0' : 'ml-auto';
 
 $site_name = get_bloginfo( 'name' );
+//fixed-header,fixed-menu-header
 ?>
 
-<div class="themeic__header header-area-wrap fixed-header <?php echo esc_attr($items_hover_over); ?>">
+<div class="themeic__header header-area-wrap fixed-menu-header <?php echo esc_attr($items_hover_over); ?>">
     <div class="header-overlay"></div>
     <div class="header-area <?php echo esc_attr($header_space_y); ?>">
         <div class="header-container d-flex align-items-center">
 
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" aria-label="<?php echo esc_attr( $site_name ); ?>">
-                <img
-                    class="th-show-light"
-                    src="<?php echo esc_url( $logo_dark ); ?>"
-                    alt="<?php echo esc_attr( $site_name ); ?>"
-                    loading="lazy"
-                >
-                <img
-                    class="th-show-dark"
-                    src="<?php echo esc_url( $logo_light ); ?>"
-                    alt="<?php echo esc_attr( $site_name ); ?>"
-                    loading="lazy"
-                >
-            </a>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" aria-label="<?php echo esc_attr( $site_name ); ?>">    
+                <?php 
+                    web_wiz_renderSvgImage($logo_dark, 'th-show-light', $site_name);
+                    web_wiz_renderSvgImage($logo_light, 'th-show-dark', $site_name);
+                ?>
+            </a>  
 
             <?php if ( has_nav_menu( 'primary-menu' ) ) : ?>
                 <?php
