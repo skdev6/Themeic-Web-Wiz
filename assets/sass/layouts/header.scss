@@ -7,8 +7,13 @@
 .header-container{
     padding-block: 1rem;
     .logo{
+        min-width: 50px;
         display: block;
-        img{
+        svg{
+            height:auto;
+            width: 100%;   
+        }
+        img,svg{
             max-width: 3.75rem; 
         }
     }
