@@ -45,8 +45,8 @@ $site_name = get_bloginfo( 'name' );
 
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo" aria-label="<?php echo esc_attr( $site_name ); ?>">    
                 <?php 
-                    web_wiz_renderSvgImage($logo_dark, 'th-show-light', $site_name);
-                    web_wiz_renderSvgImage($logo_light, 'th-show-dark', $site_name);
+                    web_wiz_renderSvgImage($logo_dark, 'th-show-dark', $site_name);
+                    web_wiz_renderSvgImage($logo_light, 'th-show-light', $site_name);
                 ?>
             </a>  
 
